@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>owl_description</name>
+  <version>0.0.1</version>
+  <description>The owl_description package</description>
+
+  <maintainer email="lentin@orangewood.co">Lentin Joseph</maintainer>
+
+  <license>Orangewood</license>
+
+  <build_depend>joint_state_publisher_gui</build_depend>
+  <build_depend>robot_state_publisher</build_depend>
+  <build_depend>urdf</build_depend>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+</package>

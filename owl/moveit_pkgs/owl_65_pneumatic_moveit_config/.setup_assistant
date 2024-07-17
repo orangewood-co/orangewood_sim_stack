@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: owl_description
+    relative_path: urdf/6.5/robot_pneumatic.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/owl_robot.srdf
+  CONFIG:
+    author_name: Lentin Joseph
+    author_email: lentin@orangewood.co
+    generated_timestamp: 1718964654

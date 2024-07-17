@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="rviz" default="true"/>
+  <arg name="use_gui" default="true"/>
+
+
+  <param name="robot_description" command="$(find xacro)/xacro '$(find owl_description)/urdf/6.5/robot_vaccum.xacro' "/>
+
+  <node if="$(arg use_gui)" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui" output="screen">
+  </node>
+
+  <node unless="$(arg use_gui)" pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" output="screen">
+  </node>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <arg name="rvizconfig" default="$(find owl_description)/rviz/rviz.rviz" />
+  <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+    
+</launch>
+

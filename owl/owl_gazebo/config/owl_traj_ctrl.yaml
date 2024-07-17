@@ -1,0 +1,29 @@
+# Publish joint_states
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: &loop_hz 125
+  
+arm_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+     - BJ 
+     - SJ 
+     - EJ 
+     - W1J 
+     - W2J 
+     - W3J 
+    
+  constraints:
+    goal_time: 0.6
+    stopped_velocity_tolerance: 0.5
+    BJ: {trajectory: 0.1, goal: 0.1}
+    SJ: {trajectory: 0.1, goal: 0.1}
+    EJ: {trajectory: 0.1, goal: 0.1}
+    W1J: {trajectory: 0.1, goal: 0.1}
+    W2J: {trajectory: 0.1, goal: 0.1}
+    W3J: {trajectory: 0.1, goal: 0.1}
+
+  stop_trajectory_duration: 0.5
+  state_publish_rate:  125
+  action_monitor_rate: 10
+  

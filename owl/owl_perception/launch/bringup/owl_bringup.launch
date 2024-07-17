@@ -1,0 +1,80 @@
+<launch>
+    <!-- Declare arguments with default values -->
+    <arg name="gripper" default="robotiq2f85" />  <!-- Option: vacuum, pneumatic,robotiq2f85 -->
+    <arg name="world" default="empty" />  <!-- Option: empty, stand,table -->
+
+    <arg name="stand_world" default="$(find owl_gazebo)/world/stand.world" />    
+    <arg name="table_world" default="$(find owl_gazebo)/world/table.world" />    
+
+    <arg name="stand_z" default="0.91" />
+
+    <arg name="table_x" default="-0.4" />
+    <arg name="table_z" default="1.07" />
+
+  
+    <!-- Include launch files based on world and gripper arguments -->
+    <!-- Empty World -->
+    <group if="$(eval arg('world') == 'empty')">
+
+      <include if="$(eval arg('gripper') == 'pneumatic')" file="$(find owl_perception)/launch/owl_gazebo_camera_pneumatic.launch" />
+      <include if="$(eval arg('gripper') == 'vacuum')" file="$(find owl_perception)/launch/owl_gazebo_camera_vaccum.launch" />
+      <include if="$(eval arg('gripper') == 'robotiq2f85')" file="$(find owl_perception)/launch/owl_gazebo_camera_robotiq2f85.launch" />
+
+    </group>
+  
+    <!-- Stand World -->
+    <group if="$(eval arg('world') == 'stand')">
+
+      <include if="$(eval arg('gripper') == 'pneumatic')" file="$(find owl_perception)/launch/owl_gazebo_camera_pneumatic.launch" >
+
+        <arg name="arg_z" value="$(arg stand_z)" />          
+        <arg name="world" value="$(arg stand_world)" />    
+
+      </include>  
+      <include if="$(eval arg('gripper') == 'vacuum')" file="$(find owl_perception)/launch/owl_gazebo_camera_vaccum.launch" >
+
+        <arg name="arg_z" value="$(arg stand_z)" />          
+        <arg name="world" value="$(arg stand_world)" />    
+
+      </include>
+      <include if="$(eval arg('gripper') == 'robotiq2f85')" file="$(find owl_perception)/launch/owl_gazebo_camera_robotiq2f85.launch" >
+
+        <arg name="arg_z" value="$(arg stand_z)" />          
+        <arg name="world" value="$(arg stand_world)" />    
+
+      </include>
+
+    </group>
+  
+    <!-- Table World -->
+    <group if="$(eval arg('world') == 'table')">
+      
+      <include if="$(eval arg('gripper') == 'pneumatic')" file="$(find owl_perception)/launch/owl_gazebo_camera_pneumatic.launch" >
+
+        <arg name="arg_x" value="$(arg table_x)" />          
+        <arg name="arg_z" value="$(arg table_z)" />          
+        <arg name="world" value="$(arg table_world)" />    
+
+
+      </include>  
+
+      <include if="$(eval arg('gripper') == 'vacuum')" file="$(find owl_perception)/launch/owl_gazebo_camera_vaccum.launch" >
+
+        <arg name="arg_x" value="$(arg table_x)" />          
+        <arg name="arg_z" value="$(arg table_z)" />          
+        <arg name="world" value="$(arg table_world)" />    
+
+
+      </include>
+
+      <include if="$(eval arg('gripper') == 'robotiq2f85')" file="$(find owl_perception)/launch/owl_gazebo_camera_robotiq2f85.launch" >
+
+        <arg name="arg_x" value="$(arg table_x)" />          
+        <arg name="arg_z" value="$(arg table_z)" />          
+        <arg name="world" value="$(arg table_world)" />    
+
+      </include>
+
+    </group>
+  </launch>
+  

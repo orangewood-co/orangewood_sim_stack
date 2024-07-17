@@ -1,0 +1,277 @@
+<?xml version="1.0"?>
+<robot name="owl_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+
+<xacro:property name="package_name" value="owl_description" />
+
+<!-- Macro of the Robotiq 2F 85 Gripper -->
+<xacro:macro name="robotiq2f85" params="parent *origin">
+
+  <joint name="robot_ee-gripper_robotiq_arg2f_base_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}" />
+      <child link="robotiq_coupler_link" />
+  </joint>
+
+  <link name="robotiq_coupler_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/visual/kinova_robotiq_coupler.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/collision/kinova_robotiq_coupler.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.000001" ixy="0.000000" ixz="0.000000" iyx="0.000000" iyy="0.000001" iyz="0.000000" izx="0.000000" izy="0.000000" izz="0.000001"/>
+    </inertial>
+  </link>
+  
+  <joint name="gripper_base_joint" type="fixed">
+    <parent link="robotiq_coupler_link"/>
+    <child link="gripper_base_link"/>
+    <origin rpy="0 1.57075 0" xyz="0 0 -0.05105"/>
+  </joint>
+
+  <link name="gripper_base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/visual/robotiq_85_base_link.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/collision/robotiq_85_base_link.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.636951"/>
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.000380" ixy="0.000000" ixz="0.000000" iyx="0.000000" iyy="0.001110" iyz="0.000000" izx="0.000000" izy="0.000000" izz="0.001171"/>
+    </inertial>
+  </link>
+  
+  <joint name="gripper_finger1_joint" type="revolute">
+    <parent link="gripper_base_link"/>
+    <child link="gripper_finger1_knuckle_link"/>
+    <axis xyz="0 0 1"/>
+    <origin rpy="3.1415 0.0 0.0" xyz="0.05490451627 0.03060114443 0.0"/>
+    <limit effort="1000" lower="0.0" upper="0.804" velocity="2.0"/>
+  </joint>
+
+  <joint name="gripper_finger2_joint" type="revolute">
+    <parent link="gripper_base_link"/>
+    <child link="gripper_finger2_knuckle_link"/>
+    <axis xyz="0 0 1"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.05490451627 -0.03060114443 0.0"/>
+    <limit effort="1000" lower="-3.14" upper="3.14" velocity="100.0"/>
+    <mimic joint="gripper_finger1_joint"/>
+  </joint>
+
+  <link name="gripper_finger1_knuckle_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/visual/robotiq_85_knuckle_link.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/collision/robotiq_85_knuckle_link.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.018491"/>
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.000009" ixy="-0.000001" ixz="0.000000" iyx="-0.000001" iyy="0.000001" iyz="0.000000" izx="0.000000" izy="0.000000" izz="0.000010"/>
+    </inertial>
+  </link>
+
+  <link name="gripper_finger2_knuckle_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/visual/robotiq_85_knuckle_link.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/collision/robotiq_85_knuckle_link.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.018491"/>
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.000009" ixy="-0.000001" ixz="0.000000" iyx="-0.000001" iyy="0.000001" iyz="0.000000" izx="0.000000" izy="0.000000" izz="0.000010"/>
+    </inertial>
+  </link>
+  
+  <joint name="gripper_finger1_finger_joint" type="fixed">
+    <parent link="gripper_finger1_knuckle_link"/>
+    <child link="gripper_finger1_finger_link"/>
+    <origin rpy="0 0 0" xyz="-0.00408552455 -0.03148604435 0.0"/>
+  </joint>
+
+  <joint name="gripper_finger2_finger_joint" type="fixed">
+    <parent link="gripper_finger2_knuckle_link"/>
+    <child link="gripper_finger2_finger_link"/>
+    <origin rpy="0 0 0" xyz="-0.00408552455 -0.03148604435 0.0"/>
+  </joint>
+
+  <link name="gripper_finger1_finger_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/visual/robotiq_85_finger_link.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/collision/robotiq_85_finger_link.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.027309"/>
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.000003" ixy="-0.000002" ixz="0.000000" iyx="-0.000002" iyy="0.000021" iyz="0.000000" izx="0.000000" izy="0.000000" izz="0.000020"/>
+    </inertial>
+  </link>
+
+  <link name="gripper_finger2_finger_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/visual/robotiq_85_finger_link.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/collision/robotiq_85_finger_link.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.027309"/>
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.000003" ixy="-0.000002" ixz="0.000000" iyx="-0.000002" iyy="0.000021" iyz="0.000000" izx="0.000000" izy="0.000000" izz="0.000020"/>
+    </inertial>
+  </link>
+  
+  <joint name="gripper_finger1_inner_knuckle_joint" type="continuous">
+    <parent link="gripper_base_link"/>
+    <child link="gripper_finger1_inner_knuckle_link"/>
+    <axis xyz="0 0 1"/>
+    <origin rpy="3.1415 0.0 0.0" xyz="0.06142 0.0127 0"/>
+    <limit effort="0.1" lower="-3.14" upper="3.14" velocity="100.0"/>
+    <mimic joint="gripper_finger1_joint" offset="0"/>
+  </joint>
+
+  <joint name="gripper_finger2_inner_knuckle_joint" type="continuous">
+    <parent link="gripper_base_link"/>
+    <child link="gripper_finger2_inner_knuckle_link"/>
+    <axis xyz="0 0 1"/>
+    <origin rpy="0 0 0" xyz="0.06142 -0.0127 0"/>
+    <limit effort="0.1" lower="-3.14" upper="3.14" velocity="100.0"/>
+    <mimic joint="gripper_finger1_joint" offset="0"/>
+  </joint>
+
+  <link name="gripper_finger1_inner_knuckle_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/visual/robotiq_85_inner_knuckle_link.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/collision/robotiq_85_inner_knuckle_link.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.029951"/>
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.000039" ixy="0.000000" ixz="0.000000" iyx="0.000000" iyy="0.000005" iyz="0.000000" izx="0.000000" izy="0.000000" izz="0.000035"/>
+    </inertial>
+  </link>
+
+  <link name="gripper_finger2_inner_knuckle_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/visual/robotiq_85_inner_knuckle_link.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/collision/robotiq_85_inner_knuckle_link.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.029951"/>
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.000039" ixy="0.000000" ixz="0.000000" iyx="0.000000" iyy="0.000005" iyz="0.000000" izx="0.000000" izy="0.000000" izz="0.000035"/>
+    </inertial>
+  </link>
+
+  <joint name="gripper_finger1_finger_tip_joint" type="continuous">
+    <parent link="gripper_finger1_inner_knuckle_link"/>
+    <child link="gripper_finger1_finger_tip_link"/>
+    <axis xyz="0 0 1"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.04303959807 -0.03759940821 0.0"/>
+    <limit effort="0.1" lower="-3.14" upper="3.14" velocity="100.0"/>
+    <mimic joint="gripper_finger1_joint" multiplier="-1"/>
+  </joint>
+
+  <joint name="gripper_finger2_finger_tip_joint" type="continuous">
+    <parent link="gripper_finger2_inner_knuckle_link"/>
+    <child link="gripper_finger2_finger_tip_link"/>
+    <axis xyz="0 0 1"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.04303959807 -0.03759940821  0.0"/>
+    <limit effort="0.1" lower="-3.14" upper="3.14" velocity="100.0"/>
+    <mimic joint="gripper_finger1_joint" multiplier="-1"/>
+  </joint>
+
+  <link name="gripper_finger1_finger_tip_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/visual/robotiq_85_finger_tip_link.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/collision/robotiq_85_finger_tip_link.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.019555"/>
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.000002" ixy="0.000000" ixz="0.000000" iyx="0.000000" iyy="0.000005" iyz="0.000000" izx="0.000000" izy="0.000000" izz="0.000006"/>
+    </inertial>
+  </link>
+
+  <link name="gripper_finger2_finger_tip_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/visual/robotiq_85_finger_tip_link.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://${package_name}/meshes/grippers/robotiq2f85/collision/robotiq_85_finger_tip_link.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.019555"/>
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.000002" ixy="0.000000" ixz="0.000000" iyx="0.000000" iyy="0.000005" iyz="0.000000" izx="0.000000" izy="0.000000" izz="0.000006"/>
+    </inertial>
+  </link>
+
+  <link name="tcp_ee"/>
+
+  <joint name="tcp_gripper" type="fixed">
+    <origin xyz="0.133 0 0" rpy="3.14 -1.57 0" />
+    <parent link="gripper_base_link" />
+    <child link="tcp_ee" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+</xacro:macro>
+</robot>

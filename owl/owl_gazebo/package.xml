@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>owl_gazebo</name>
+  <version>0.0.0</version>
+  <description>The owl_gazebo package</description>
+
+  <maintainer email="lentin@orangewood.co">Lentin</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>joint_trajectory_controller</build_depend>
+  <build_export_depend>gazebo_ros</build_export_depend>
+  <build_export_depend>joint_trajectory_controller</build_export_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>joint_trajectory_controller</exec_depend>
+  
+  <exec_depend>ros_controllers</exec_depend>
+  <exec_depend>gazebo_ros_pkgs</exec_depend>
+  <exec_depend>controller_manager</exec_depend>  
+  <exec_depend>joint_state_controller</exec_depend>
+  <exec_depend>position_controllers</exec_depend>
+  <exec_depend>joint_state_controller</exec_depend>
+  <exec_depend>effort_controllers</exec_depend>      
+      
+      
+</package>

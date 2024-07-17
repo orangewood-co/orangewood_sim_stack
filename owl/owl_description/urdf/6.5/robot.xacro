@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot name="owl_robot" xmlns:xacro="http://wiki.ros.org/xacro">
+
+
+    <xacro:include filename="$(find owl_description)/urdf/6.5/owl.xacro"/>    
+
+    <xacro:owl_arm parent="world">
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+    </xacro:owl_arm>
+
+</robot>

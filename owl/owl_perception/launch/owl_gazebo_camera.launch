@@ -1,0 +1,62 @@
+<launch>
+
+<!-- Robot Spawning location -->
+    <arg name="arg_x" default="0.0" />
+    <arg name="arg_y" default="0.00" />
+    <arg name="arg_z" default="0.06" />
+    <arg name="arg_R" default="0.00" />
+    <arg name="arg_P" default="0.00" />
+    <arg name="arg_Y" default="0.00" />
+
+    <!-- Arguments -->
+    <arg name="paused" default="false" />
+    <arg name="use_sim_time" default="true" />
+    <arg name="gui" default="true" />
+    <arg name="rviz" default="false" />
+    <arg name="headless" default="false" />
+    <arg name="debug" default="false" />
+    <arg name="verbose" default="false" />
+
+    <arg name="world" default="$(find owl_gazebo)/world/empty.world" />    
+    <arg name="model_path" default="$(find owl_gazebo)/models"/>
+    <env name="GAZEBO_MODEL_PATH" value="$(arg model_path)"/>
+    
+
+    <!-- Gazebo with World File -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="paused" value="$(arg paused)" />
+        <arg name="use_sim_time" value="$(arg use_sim_time)" />
+        <arg name="headless" value="$(arg headless)" />
+        <arg name="verbose" value="$(arg verbose)" />
+        <arg name="world_name" value="$(arg world)" />        
+
+    </include>
+
+    <!-- Load Robot Description in Parameter Server -->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find owl_perception)/urdf/owl_6.5_gazebo_control_camera.xacro' "/>
+    <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="
+    
+        -urdf
+        -param robot_description 
+        -model owr_6.5
+        -x $(arg arg_x) 
+        -y $(arg arg_y) 
+        -z $(arg arg_z) 
+        -Y $(arg arg_Y) "/>
+
+
+    <!-- Start Trajector controller -->
+    <rosparam file="$(find owl_gazebo)/config/owl_traj_ctrl.yaml"/>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" args="arm_controller" />
+
+
+    <!--  Robot state publisher -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+
+    <!-- Rviz -->
+    <arg name="rvizconfig" default="$(find owl_gazebo)/rviz/rviz.rviz" />
+    <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+</launch>

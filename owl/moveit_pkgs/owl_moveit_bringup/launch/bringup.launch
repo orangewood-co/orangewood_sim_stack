@@ -1,0 +1,37 @@
+<launch>
+    <!-- Argument to select the gripper type -->
+    <arg name="gripper" default="robotiq2f85" doc="Type of gripper to use: vacuum, pneumatic, robotiq2f85"/>
+    <arg name="sim" default="on" />  <!-- Option: empty, stand,table -->
+
+    <group if="$(eval arg('sim') == 'on')">
+
+        <!-- Conditional includes based on gripper argument -->
+        <include if="$(eval arg('gripper') == 'vacuum')" file="$(find owl_65_vaccum_moveit_config)/launch/demo.launch"/>
+        <include if="$(eval arg('gripper') == 'pneumatic')" file="$(find owl_65_pneumatic_moveit_config)/launch/demo.launch"/>
+        <include if="$(eval arg('gripper') == 'robotiq2f85')" file="$(find owl_65_robotiq_2f_85_moveit_config)/launch/demo.launch"/>
+        <include if="$(eval arg('gripper') == 'none')" file="$(find owl_65_moveit_config)/launch/demo.launch"/>
+
+    </group>
+
+    <group if="$(eval arg('sim') == 'off')">
+
+        <include if="$(eval arg('gripper') == 'vacuum')" file="$(find owl_65_vaccum_moveit_config)/launch/demo.launch">
+            <arg name="moveit_controller_manager" value="fake" />
+        </include>
+
+        <include if="$(eval arg('gripper') == 'pneumatic')" file="$(find owl_65_pneumatic_moveit_config)/launch/demo.launch">
+            <arg name="moveit_controller_manager" value="fake" />
+        </include>
+
+        <include if="$(eval arg('gripper') == 'robotiq2f85')" file="$(find owl_65_robotiq_2f_85_moveit_config)/launch/demo.launch">
+            <arg name="moveit_controller_manager" value="fake" />
+        </include>
+        
+        
+        <include if="$(eval arg('gripper') == 'none')" file="$(find owl_65_moveit_config)/launch/demo.launch">
+            <arg name="moveit_controller_manager" value="fake" />
+        </include>
+
+    </group>
+       
+</launch>

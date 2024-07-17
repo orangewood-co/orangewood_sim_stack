@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot name="owl_robot" xmlns:xacro="http://wiki.ros.org/xacro">
+
+
+    <xacro:include filename="$(find owl_gazebo)/urdf/owl_6.5_gazebo_control_pneumatic.xacro"/>    
+    <xacro:include filename="$(find owl_perception)/urdf/camera/d435/d435.urdf.xacro"/>    
+
+
+    <!-- D 435 Sensor --> 
+    <xacro:sensor_d435 name="mount" parent="base_link">
+        <origin xyz="0.3 0.0 1.0" rpy="0 1.57 0" />
+    </xacro:sensor_d435>
+    
+
+</robot>

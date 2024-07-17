@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot name="owl_robot" xmlns:xacro="http://wiki.ros.org/xacro">
+
+
+    <xacro:include filename="$(find owl_description)/urdf/6.5/owl.xacro"/>    
+    <xacro:include filename="$(find owl_description)/urdf/6.5/gazebo/gazebo_6.5_control.xacro"/>    
+
+
+    <!-- Robotiq 2F 85 Macros-->
+    <xacro:include filename="$(find owl_description)/urdf/grippers/robotiq2f85/robotiq2f85.urdf.xacro"/>    
+    <xacro:include filename="$(find owl_description)/urdf/grippers/robotiq2f85/robotiq2f85.gazebo.xacro"/>    
+
+    <!-- OWL 6.5 Robot-->
+    <xacro:owl_arm parent="world">
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+    </xacro:owl_arm>
+
+    <!-- OWL 6.5 Gazebo control-->
+    <xacro:gazebo_control/>
+    
+    <!-- Adding Robotiq 2F 85 -->
+    <xacro:robotiq2f85 parent="tcp">
+        <origin xyz="0 0.0 -0.01" rpy="0 3.14 0" />
+    </xacro:robotiq2f85>
+
+
+    <!-- Robotiq 2F 85 Simulation-->
+
+    <xacro:robotiq2f85_gazebo/>
+
+    
+
+</robot>

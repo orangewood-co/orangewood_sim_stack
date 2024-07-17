@@ -1,0 +1,43 @@
+<launch>
+    <!-- Declare arguments with default values -->
+    <arg name="gripper" default="robotiq2f85" />  <!-- Option: vacuum, pneumatic,robotiq2f85 -->
+    <arg name="world" default="empty" />  <!-- Option: empty, stand,table -->
+    <arg name="camera" default="on" />  <!-- Option: empty, stand,table -->
+    <arg name="sim" default="on" />  <!-- Option: simulation ON or OFF -->
+    <arg name="time" default="5" />  <!-- Option: Time to launch MoveIt -->
+
+    <!-- Start Gazebo-->
+
+    <group if="$(eval arg('sim') == 'on')">
+
+ 
+      <include if="$(eval arg('camera') == 'on')" file="$(find owl_perception)/launch/bringup/owl_bringup.launch" >
+
+        <arg name="gripper" value="$(arg gripper)" />  
+        <arg name="world" value="$(arg world)" />    
+
+      </include>  
+      <include if="$(eval arg('camera') == 'off')" file="$(find owl_gazebo)/launch/bringup/owl_bringup.launch" >
+
+        <arg name="gripper" value="$(arg gripper)" />  
+        <arg name="world" value="$(arg world)" />    
+
+      </include>
+
+    </group>
+
+
+
+    <!-- Start MoveIt with time roslaunch package -->
+
+      <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+          <arg name="time" value="$(arg time)" />
+          <arg name="pkg" value="owl_moveit_bringup" />
+          <arg name="file" value="bringup.launch" />
+          <arg name="value" value="gripper:=$(arg gripper) sim:=$(arg sim)" />
+          <arg name="node_name" value="timed_roslaunch" /> <!-- This is optional argument -->
+      </include>
+      
+
+    
+</launch>

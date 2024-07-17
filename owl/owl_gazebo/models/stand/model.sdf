@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="stand">
+    <static>true</static>
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://stand/meshes/stand.dae</uri>
+          </mesh>
+        </geometry>
+        <pose>0 0 0.84 0 0 -1.57</pose> <!-- x, y, z, roll, pitch, yaw -->            
+      </collision>
+      <visual name="visual">
+        <geometry>-0.144271
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://stand/meshes/stand.dae</uri>
+          </mesh>
+        </geometry>
+        <pose>0 0 0.84 0 0 -1.57</pose> <!-- x, y, z, roll, pitch, yaw -->    
+        
+        <material>
+          <ambient>0.5 0.5 0.5 1</ambient>
+          <diffuse>0.5 0.5 0.5 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 1</emissive>
+        </material>
+
+
+        
+      </visual>
+    </link>
+  </model>
+</sdf>
