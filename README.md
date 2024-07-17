@@ -1,6 +1,6 @@
-# OrangeWood Simulation Stack
+# Orangewood Simulation Stack
 
-This repository has a simulation and MoveIt! stack of indigenous OWL 6.5 Robot.
+This repository has a simulation packages and MoveIt! config of Orangewood indigenous OWL 6.5 Robot. It is also including orangewood sdk examples.
 
 # Prerequisites
 
@@ -15,7 +15,7 @@ ROS Noetic Single line installation
 wget -c https://raw.githubusercontent.com/qboticslabs/ros_install_noetic/master/ros_install_noetic.sh && chmod +x ./ros_install_noetic.sh && ./ros_install_noetic.sh
 ```
 
-# Setting Orangewood simulation on Host PC
+# Setting Orangewood simulation 
 
 We have two methods to test and work with simulation. 
 
@@ -28,7 +28,7 @@ If you want to setup in host PC, you can follow this instruction.
 
 ---------------------------------
 
-## Setting ROS Workspace for Simulation
+## 1) Setting Simulation in HOST PC
 
 We have to create a ROS workspace to build the workspace. 
 
@@ -54,30 +54,30 @@ echo "source ~/orangewood_ws/devel/setup.bash" >> /home/$USER/.bashrc
 source /home/$USER/.bashrc
 ```
 
-# Repository File Structure
+## Repository File Structure
 
 ![Repository structure](img/tree.png)
 
 
 
 # Running instruction: OWL 6.5 Robot
-After setting the repository, we can run the Gazebo
+After setting the repository, we can run the Gazebo simulation
 
 **Terminal 1:**
 
-Start Gazebo simulation of OWL 6.5 + Robotiq 2F 85 Gripper
+Eg. Start Gazebo simulation of OWL 6.5 + Robotiq 2F 85 Gripper
 
 ```
 roslaunch owl_bringup bringup.launch gripper:=robotiq2f85 world:=table  camera:=on sim:=on time:=5
 ```
 
-Here are the list of options in the gripper: 
+Here are the list of options for the gripper: 
 
 1) pneumatic 
 2) vacuum
 3) robotiq2f85
 
-Here are the list of options in the world: 
+Here are the list of options for the world: 
 
 1) empty
 2) stand
@@ -96,17 +96,17 @@ Here are the options for sim. This option enable or disable Gazebo and only run 
 
 Here are the options for time. 
 
-This time mention when to start MoveIt config after simulation. If you are running without simulation, you can set this as 0. The value is in sec. 
+This time is when to start MoveIt config after launching the simulation. If you don't need Gazebo simulation, you can set sim as "off" and this as 0. If you are starting simulation, better to have a value from 5 to 10. The value is in sec. 
 
 
 
 ![OWL Gazebo MoveIt](img/owl.png)
 
-
+#
 
 # Setting OWL Robot SDK 
 
-The OWL Robot SDK is simple API built on moveit_commander module from MoveIt. The APIs enable the developers to quickly test their application without much difficulty in understanding MoveIt APIs
+The OWL Robot SDK is simple API built on moveit_commander module from MoveIt. The APIs enable the developers to quickly test their application by not understanding core MoveIt APIs
 
 ## Installing OWL Robot SDK
 
@@ -118,10 +118,10 @@ pip install owl-robot-sdk
 
 ## Run example of OWL Robot SDK
 
-Make sure you are running, gazebo with MoveIt using above commands, if it is running, navigate to
+**Note: Make sure you are running, gazebo with MoveIt using above commands**, if it is running, navigate to
 
 
-*orangewood_simstack/owl/owl_robot_sdk/examples/api_test.py*
+*orangewood_simstack/owl/owl_robot_sdk_examples/api_test.py*
 
 Run it using following command
 
@@ -132,7 +132,7 @@ python3 api_test.py
 You can see various test being performed. If there is any failure, report to developers
 
 
-# Setting Orangewood simulation on Docker
+## 2) Setting Orangewood simulation on Docker
 
 In order to setup Docker in your machine, first clone the orangewood simstack in your host machine
 
@@ -178,7 +178,7 @@ root@025d7e913e06:/home/robot/orangewood_ws# rosdep install --from-paths src --i
 
 #Building packages
 
-root@025d7e913e06:/home/robot/orangewood_ws# catkin_make
+root@025d7e913e06:/home/robot/orangewood_ws# catkin_make -j1
 
 
 #Source workspace
@@ -197,13 +197,10 @@ orangewood_simstack/docker$ ./new_sim_session.bash
 
 root@025d7e913e06:/home/robot/orangewood_ws# source devel/setup.bash
 
-root@025d7e913e06:/home/robot/orangewood_ws# roslaunch owl_moveit_bringup bringup.launch gripper:=robotiq2f85
-
-```
-
-Now you can set the pose of the end effector using marker, and press Plan & Execute
-
 ## Testing SDK Example
 
-Take a new session and you can try the owl_robot_sdk/*example/api_test.py*
+root@025d7e913e06:/home/robot/orangewood_ws# cd owl/owl_robot_sdk_examples/
+
+root@025d7e913e06:/home/robot/orangewood_ws/owl/owl_robot_sdk_examples# python3 api_test.py
+```
 
