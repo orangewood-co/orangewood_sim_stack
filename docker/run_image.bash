@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#Image name, default orangewood_sim_image
+# If you download from docker hub, it will be: orangewoodlabs/orangewood_sim
+docker_image="$1"
+echo "Docker Image is $1"
 xhost +local:docker
 
 echo "Checking for NVIDIA GPU and driver..."
@@ -36,7 +40,7 @@ run_docker_nvidia() {
         --device="/dev/video0" \
         --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
         --volume="/home/$USER:/home/$USER" \
-        orangewood_sim_image \
+        $docker_image \
         bash
 }
 
@@ -52,7 +56,7 @@ run_docker() {
         --device="/dev/video0" \
         --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
         --volume="/home/$USER:/home/$USER" \
-        orangewood_sim_image \
+        $docker_image \
         bash
 }
 
