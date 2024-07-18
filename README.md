@@ -2,18 +2,7 @@
 
 This repository has a simulation packages and MoveIt! config of Orangewood indigenous OWL 6.5 Robot. It is also including orangewood sdk examples.
 
-# Prerequisites
 
-Here are the prerequisites to run the Gazebo simulation
-
-* [Ubuntu 20.04.6 LTS](https://releases.ubuntu.com/focal/)
-* [ROS Noetic Full Desktop Full](https://wiki.ros.org/noetic/Installation/Ubuntu) , you can also use [Single line installation](https://github.com/qboticslabs/ros_install_noetic) which is given below
-
-
-ROS Noetic Single line installation
-```
-wget -c https://raw.githubusercontent.com/qboticslabs/ros_install_noetic/master/ros_install_noetic.sh && chmod +x ./ros_install_noetic.sh && ./ros_install_noetic.sh
-```
 
 # Setting Orangewood simulation 
 
@@ -26,11 +15,24 @@ If you want to setup in host PC, you can follow this instruction.
 
 **Note: If you want to install Docker and run simulation, jump to the last section.**
 
----------------------------------
 
 ## 1) Setting Simulation in HOST PC
 
-We have to create a ROS workspace to build the workspace. 
+### Prerequisites
+
+Here are the prerequisites to run this Gazebo simulation
+
+* [Ubuntu 20.04.6 LTS](https://releases.ubuntu.com/focal/)
+* [ROS Noetic Full Desktop Full](https://wiki.ros.org/noetic/Installation/Ubuntu) , you can also use [Single line installation](https://github.com/qboticslabs/ros_install_noetic) which is given below
+
+
+ROS Noetic Single line installation
+```
+wget -c https://raw.githubusercontent.com/qboticslabs/ros_install_noetic/master/ros_install_noetic.sh && chmod +x ./ros_install_noetic.sh && ./ros_install_noetic.sh
+```
+
+After installing ROS Noetic in the host PC, we can setup a ROS workspace to build the sim packages.
+
 
 ```
 mkdir -p ~/orangewood_ws/src
@@ -54,14 +56,14 @@ echo "source ~/orangewood_ws/devel/setup.bash" >> /home/$USER/.bashrc
 source /home/$USER/.bashrc
 ```
 
-## Repository File Structure
+### Repository File Structure
 
 ![Repository structure](img/tree.png)
 
 
 
 # Running instruction: OWL 6.5 Robot
-After setting the repository, we can run the Gazebo simulation
+After setting the repository, you can run the Gazebo simulation
 
 **Terminal 1:**
 
@@ -96,7 +98,7 @@ Here are the options for sim. This option enable or disable Gazebo and only run 
 
 Here are the options for time. 
 
-This time is when to start MoveIt config after launching the simulation. If you don't need Gazebo simulation, you can set sim as "off" and this as 0. If you are starting simulation, better to have a value from 5 to 10. The value is in sec. 
+This time is when to start MoveIt config after launching the simulation. If you don't want Gazebo simulation, you can set sim as "off" and time as 0. If you are starting simulation, better to have a value from 5 to 10. The value is in sec. 
 
 
 
