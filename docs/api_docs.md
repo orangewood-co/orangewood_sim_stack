@@ -170,3 +170,4 @@ Configures the gripper to a specific state or value.
 - `mode` (str): Mode of setting the gripper ('state' or 'value').
 - `wait` (bool): Whether to wait for the move to complete.
 
+
