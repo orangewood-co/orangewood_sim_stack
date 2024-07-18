@@ -28,7 +28,7 @@ Here are the prerequisites to run this Gazebo simulation
 
 ROS Noetic Single line installation
 ```
-wget -c https://raw.githubusercontent.com/qboticslabs/ros_install_noetic/master/ros_install_noetic.sh && chmod +x ./ros_install_noetic.sh && ./ros_install_noetic.sh
+wget -c https://raw.githubusercontent.com/orangewood-co/orangewood_sim_stack/main/host_pc_scripts/ros_install_noetic.sh && chmod +x ./ros_install_noetic.sh && ./ros_install_noetic.sh
 ```
 
 After installing ROS Noetic in the host PC, we can setup a ROS workspace to build the sim packages.
