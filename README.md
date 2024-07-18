@@ -102,7 +102,7 @@ This time is when to start MoveIt config after launching the simulation. If you 
 
 
 
-![OWL Gazebo MoveIt](img/owl.png)
+![OWL Gazebo MoveIt](img/owl_table.png)
 
 #
 
@@ -212,8 +212,11 @@ root@025d7e913e06:/home/robot/orangewood_ws# source devel/setup.bash
 
 
 # Run OWL 6.5 Simulation
-roslaunch owl_bringup bringup.launch gripper:=robotiq2f85 world:=table  camera:=on sim:=on time:=5
+roslaunch owl_bringup bringup.launch gripper:=robotiq2f85 world:=stand  camera:=on sim:=on time:=5
 ```
+
+![OWL Gazebo MoveIt](img/owl_stand.png)
+
 
 You can take next docker session from next host terminal. Switch to docker folder and execute the following command
 
