@@ -191,7 +191,7 @@ orangewood_simstack/docker$ ./run_image.bash orangewood_sim_image
 
 #For pulled image
 
-./run_image.bash orangewoodlabs/orangewood_sim
+orangewood_simstack/docker$ ./run_image.bash orangewoodlabs/orangewood_sim
 
 ```
 
