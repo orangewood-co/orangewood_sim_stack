@@ -204,6 +204,13 @@ orangewood_simstack/docker$ ./run_image.bash orangewoodlabs/orangewood_sim
 After getting the terminal, follow the commands to build the ROS package and install depdencies
 
 ```
+#Upgrading to latest owl_robot_sdk
+
+root@025d7e913e06:/home/robot/orangewood_ws# pip install owl-robot-sdk --upgrade
+
+
+# Install depedencies
+
 root@025d7e913e06:/home/robot/orangewood_ws# rosdep install --from-paths src --ignore-src -r -y
 
 
