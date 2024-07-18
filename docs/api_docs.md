@@ -1,134 +1,172 @@
-# API Documentation
-
 ## Class `OwlSimClient`
 
-Class acting as a client interface to control a MoveIt! based robot through ROS. It handles initializing, controlling, and interacting with the robot within a simulated environment. This includes managing movement, adding obstacles, and handling the robot's gripper.
+Class acting as a client interface to control a MoveIt! based robot through ROS. It handles initializing,
+controlling, and interacting with the robot within a simulated environment. This includes managing movement,
+adding obstacles, and handling the robot's gripper.
 
-### Method `__init__`
+### Methods
 
-Initializes the robot environment, including the MoveIt! commander, ROS node, and publishers. Sets up arm and gripper groups for robot manipulation.
+#### Method `__init__`
 
-#### Arguments
-- `arm_group_name` (str): Name of the arm move group.
-- `gripper_group_name` (str): Name of the gripper move group.
-- `wait_for_servers` (int): Time to wait for move group servers to be available.
-- `gripper_enable` (bool): Flag to decide gripper to enable or not.
+Initializes the robot environment, including the MoveIt! commander, ROS node, and publishers.
+Sets up arm and gripper groups for robot manipulation.
 
-### Method `__repr__`
+**Parameters:**
+- `arm_group_name` (default='arm'): Name of the arm move group.
+- `gripper_group_name` (default='gripper'): Name of the gripper move group.
+- `wait_for_servers` (default=10): Time to wait for move group servers to be available.
+- `gripper_enable` (default=True): Flag to decide whether to enable the gripper or not.
 
-Return the current joint values of robot.
+#### Method `__repr__`
 
-### Method `get_tcp`
+Provides a string representation of the client's current state.
 
-Return the current TCP values of robot.
+**Parameters:**
+- None
 
-### Method `get_tcp_orientation`
+#### Method `__str__`
 
-Return the current TCP orientation in euler or quaternion values.
+Provides a simple string representation.
 
-- `mode`: euler
-- `mode`: quat
+**Parameters:**
+- None
 
-### Method `get_tcp_position`
+#### Method `__enter__`
 
-Return the current TCP position x, y, z.
+Handles context management entry.
 
-### Method `move_to_pose`
+**Parameters:**
+- None
 
-Request robot server to move to goal pose with desired tool speed in cartesian space.
+#### Method `__exit__`
 
-#### Parameters
-- `goalPose` (Pose): Goal pose [x, y, z, rx, ry, rz] robot need to achieve with desired tool speed.
-- `toolSpeed` (float): Tool speed with which robot need to move.
-- `wait` (bool): True will make the move call synchronous and wait till move is completed.
-- `relative` (bool): Move relative to current robot pose.
-- `moveType` (int): Type of move plan need to generate for move.
+Handles context management exit.
 
-### Method `move_to_joint`
+**Parameters:**
+- `exc_type` (default=None)
+- `exc_value` (default=None)
+- `traceback` (default=None)
 
-Request robot server to move to goal joint with desired tool speed in joint space.
+#### Method `is_running`
 
-#### Parameters
-- `goalPose` (Joint): Goal joint robot need to achieve with desired tool speed in radians.
-- `toolSpeed` (float): Tool speed with which robot need to move.
-- `wait` (bool): True will make the move call synchronous and wait till move is completed.
-- `relative` (bool): Move relative to current robot pose.
+Checks if the robot's move group is currently available.
 
-### Method `move_stop`
+**Returns:**
+- `bool`: True if the move group is available, False otherwise.
 
-Request MoveIt to stop the current move.
 
-### Method `move_pause`
+#### Method `get_version`
 
-Request MoveIt to pause the current move.
+Returns the current version of the robot software.
 
-### Method `move_resume`
+**Parameters:**
+- None
 
-Request MoveIt to resume the paused move.
+#### Method `get_joint`
 
-### Method `move_abort`
+Returns the current joint values of the robot.
 
-Request MoveIt to abort the current move.
+**Parameters:**
+- None
 
-### Method `change_speed_fraction`
+#### Method `get_tcp`
 
-Change the speed fraction setting for move [0 -> 1].
+Returns the current TCP values of the robot.
 
-### Method `enable`
+**Parameters:**
+- None
 
-Request to enable the robot. This command is admin privileged, an access code is required.
+#### Method `get_tcp_orientation`
 
-#### Parameters
-- `access_code` (str)
+Returns the current TCP orientation in Euler or Quaternion values.
 
-### Method `disable`
+**Parameters:**
+- `mode` (default='quat'): Specify 'euler' for Euler angles or 'quat' for Quaternion.
 
-Request to disable the robot. This command is admin privileged, an access code is required.
+#### Method `get_tcp_position`
 
-#### Parameters
-- `access_code` (str)
+Returns the current TCP position (x, y, z).
 
-### Method `close`
+**Parameters:**
+- None
+
+#### Method `get_version`
+
+Returns the current version of the robot software.
+
+**Parameters:**
+- None
+
+#### Method `get_joint`
+
+Returns the current joint values of the robot.
+
+**Parameters:**
+- None
+
+#### Method `get_tcp`
+
+Returns the current TCP values of the robot.
+
+**Parameters:**
+- None
+
+#### Method `get_tcp_orientation`
+
+Returns the current TCP orientation in Euler or Quaternion values.
+
+**Parameters:**
+- `mode` (default='quat'): Specify 'euler' for Euler angles or 'quat' for Quaternion.
+
+#### Method `get_tcp_position`
+
+Returns the current TCP position (x, y, z).
+
+**Parameters:**
+- None
+
+#### Method `add_obstacle`
 
 Adds an obstacle to the planning scene based on the specified parameters.
 
-#### Arguments
+**Parameters:**
 - `object_type` (str): Type of the obstacle ('plane' or 'sphere').
 - `name` (str): Identifier for the obstacle.
 - `pose` (list): Position and orientation of the obstacle.
 - `frame_id` (str): The reference frame for the obstacle's position.
 
-#### Returns
+**Returns:**
 - `bool`: True if the obstacle was successfully added, False otherwise.
 
-### Method `get_obstacles_list`
+#### Method `get_obstacles_list`
 
 Retrieves a list of all obstacles currently present in the planning scene.
 
-#### Returns
+**Returns:**
 - `list`: A list of obstacle names.
 
-### Method `remove_obstacle`
+#### Method `remove_obstacle`
 
 Removes a specified obstacle from the planning scene.
 
-#### Arguments
+**Parameters:**
 - `name` (str, optional): Name of the obstacle to remove. Defaults to None.
 
-### Method `set_home`
+#### Method `set_home`
 
 Sets the robot's position to a predefined home position.
 
-#### Arguments
+**Parameters:**
 - `pose` (str): The name of the home position.
 - `wait` (bool): Whether to wait for the move to complete.
 
-### Method `set_gripper`
+#### Method `set_gripper`
 
 Configures the gripper to a specific state or value.
 
-#### Arguments
+**Parameters:**
 - `goal_state` (str): Target state for the gripper ('open' or 'close').
 - `goal_value` (int): Target value for the gripper position.
 - `mode` (str): Mode of setting the gripper ('state' or 'value').
 - `wait` (bool): Whether to wait for the move to complete.
+
