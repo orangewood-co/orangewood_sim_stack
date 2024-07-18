@@ -118,6 +118,12 @@ The following command can install OWL Robot SDK
 pip install owl-robot-sdk
 ```
 
+## API Documentation
+
+Click here to view the current [API documentation](docs/api_docs.md)
+
+
+
 ## Run example of OWL Robot SDK
 
 **Note: Make sure you are running, gazebo with MoveIt using above commands**, if it is running, navigate to
