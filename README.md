@@ -160,16 +160,39 @@ It will take some time to install Docker and NVIDIA Container toolkit
 
 After installing everything, do a REBOOT of your PC
 
-## Build Docker Image of Orangewood Simulation
+## Build/Pull Docker Image of Orangewood Simulation
 
+We have two option to get the docker image for simulation, 
+
+1) Building a new image
+2) Download/Pull an image from Docker Hub.
+
+Building a new docker image will take time, if you have good configuration PC, you can do that, othervice you can go with pulling from docker hub. It require ~4GB of download
+
+
+1) Building a new Image
 ```
 orangewood_simstack/docker$ ./build_image.bash
 ```
 
-## Run Docker for running simulation
+2) Pulling existing image from [Docker Hub](https://hub.docker.com/r/orangewoodlabs/orangewood_sim)
 
 ```
-orangewood_simstack/docker$ ./run_image.bash
+docker pull orangewoodlabs/orangewood_sim
+```
+
+## Run Docker for running simulation
+
+After building/downloading image, you can run it using following command
+```
+#For build image
+
+orangewood_simstack/docker$ ./run_image.bash orangewood_sim_image
+
+#For pulled image
+
+./run_image.bash orangewoodlabs/orangewood_sim
+
 ```
 
 After getting the terminal, follow the commands to build the ROS package and install depdencies
