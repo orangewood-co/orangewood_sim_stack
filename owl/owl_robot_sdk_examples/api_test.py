@@ -19,12 +19,14 @@ class TestOwlSimClient:
 
         print("Application is running. Press Ctrl+C to exit.")
 
-        self.client = OwlSimClient(self.group_name,gripper_group)
+        self.client = OwlSimClient(self.group_name,gripper_group,5,True)
 
 
 
         self.get_sdk_api()
         self.set_sdk_api()
+
+
 
     def signal_handler(self,sig, frame):
         print("Interrupt received, closing application.")
@@ -138,7 +140,7 @@ class TestOwlSimClient:
         self.client.add_obstacle("box1",1,1,1,1,pose,"box")
         self.client.add_obstacle("cone1",1,1,1,1,[5,5,5,0,0,0],"cone")
         self.client.add_obstacle("plane1")
-        self.client.add_obstacle("mesh1",1,1,1,1,[1,1,1,0,0,0],"mesh","/home/robot/arm.stl")
+        self.client.add_obstacle("mesh1",1,1,1,1,[1,1,1,0,0,0],"mesh","arm.stl")
 
         print("Get Obstacle List")
         obstacle_list=self.client.get_obstacles_list()
@@ -149,20 +151,32 @@ class TestOwlSimClient:
         self.client.remove_obstacle()
 
         ######################################################
+
         print ("Testing Gripper Control with states")
         self.client.set_gripper("open",1,"state")
-        time.sleep(5)
+        get_gripper = self.client.get_gripper_val()
+        print(get_gripper)
+        time.sleep(2)
         self.client.set_gripper("close",0,"state")
-        time.sleep(5)
+        get_gripper = self.client.get_gripper_val()
+        print(get_gripper)
+
+        time.sleep(2)
         print ("Testing Gripper Control with value")
-        self.client.set_gripper("open",1,"value")
-        time.sleep(5)
-        self.client.set_gripper("close",0,"value")
+        self.client.set_gripper("close",0.799,"value")
 
+        get_gripper = self.client.get_gripper_val()
+        print(get_gripper)
 
+        time.sleep(2)
+        self.client.set_gripper("open",0.0,"value")
+        get_gripper = self.client.get_gripper_val()
+        print(get_gripper)
+
+        time.sleep(2)
+        self.client.close()
 
 if __name__ == "__main__":
     testowl = TestOwlSimClient("arm","gripper")
-
 
 

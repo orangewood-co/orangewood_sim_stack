@@ -171,3 +171,11 @@ Configures the gripper to a specific state or value.
 - `wait` (bool): Whether to wait for the move to complete.
 
 
+#### Method `get_gripper`
+
+Get the current gripper state
+
+**Parameters:**
+
+**Returns:**
+- `list`: A list of joint values.
